@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Blindagem PIX — Proteja seu WhatsApp e seu dinheiro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green:       #0F6E56;
+    --green-mid:   #1D9E75;
+    --green-light: #E1F5EE;
+    --red:         #C0392B;
+    --red-light:   #FDEDEC;
+    --red-border:  #E74C3C;
+    --dark:        #111210;
+    --mid:         #3D3D3B;
+    --muted:       #6B6B68;
+    --border:      #E5E3DC;
+    --bg:          #FAFAF8;
+    --white:       #FFFFFF;
+    --yellow:      #F39C12;
+    --max:         480px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--dark);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── STICKY CTA BAR ─────────────────────────────── */
+  .sticky-bar {
+    position: fixed; bottom: 0; left: 0; right: 0; z-index: 100;
+    background: var(--green);
+    padding: 12px 20px 16px;
+    box-shadow: 0 -4px 24px rgba(0,0,0,.18);
+    display: none;
+  }
+  .sticky-bar.visible { display: block; }
+  .sticky-bar-inner {
+    max-width: var(--max);
+    margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  }
+  .sticky-bar-text { color: rgba(255,255,255,.85); font-size: 12px; line-height: 1.3; }
+  .sticky-bar-text strong { color: #fff; font-size: 14px; display: block; }
+  .sticky-bar-btn {
+    background: #fff; color: var(--green);
+    font-weight: 800; font-size: 13px;
+    padding: 10px 18px; border-radius: 10px;
+    white-space: nowrap; border: none; cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  /* ── LAYOUT ──────────────────────────────────────── */
+  .page { max-width: var(--max); margin: 0 auto; }
+  section { padding: 40px 20px; }
+
+  /* ── HERO ────────────────────────────────────────── */
+  .hero {
+    background: var(--dark);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-inner {
+    max-width: var(--max); margin: 0 auto;
+    padding: 44px 20px 36px;
+    position: relative; z-index: 1;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(231,76,60,.15);
+    border: 1px solid rgba(231,76,60,.3);
+    color: #FF6B5B;
+    font-size: 11px; font-weight: 700;
+    letter-spacing: .08em; text-transform: uppercase;
+    padding: 5px 10px; border-radius: 6px;
+    margin-bottom: 20px;
+  }
+  .hero-badge::before {
+    content: '';
+    width: 6px; height: 6px; border-radius: 50%;
+    background: #FF6B5B;
+    animation: pulse 1.8s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%,100% { opacity: 1; transform: scale(1); }
+    50%      { opacity: .4; transform: scale(.7); }
+  }
+  .hero h1 {
+    font-size: 28px; font-weight: 900;
+    line-height: 1.15; color: #fff;
+    letter-spacing: -.02em;
+    margin-bottom: 16px;
+  }
+  .hero h1 em {
+    font-style: normal;
+    color: #FF6B5B;
+  }
+  .hero-sub {
+    font-size: 15px; color: rgba(255,255,255,.65);
+    line-height: 1.6; margin-bottom: 28px;
+  }
+  .hero-sub strong { color: rgba(255,255,255,.9); }
+  .btn-primary {
+    display: block; width: 100%;
+    background: var(--green-mid);
+    color: #fff; font-weight: 800; font-size: 16px;
+    padding: 17px 20px; border-radius: 14px;
+    border: none; cursor: pointer;
+    text-align: center; text-decoration: none;
+    letter-spacing: -.01em;
+    position: relative; overflow: hidden;
+  }
+  .btn-primary::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: rgba(255,255,255,0);
+    transition: background .15s;
+  }
+  .btn-primary:active::after { background: rgba(255,255,255,.08); }
+  .btn-primary small {
+    display: block; font-weight: 400;
+    font-size: 12px; opacity: .8; margin-top: 2px;
+  }
+  .hero-trust {
+    display: flex; align-items: center; justify-content: center; gap: 16px;
+    margin-top: 16px;
+  }
+  .hero-trust span {
+    font-size: 11px; color: rgba(255,255,255,.45);
+    display: flex; align-items: center; gap: 5px;
+  }
+  .hero-trust span::before { content: '✓'; color: var(--green-mid); font-weight: 700; }
+
+  /* ── SCENE ───────────────────────────────────────── */
+  .scene {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+  }
+  .scene-inner { max-width: var(--max); margin: 0 auto; padding: 36px 20px; }
+  .chat-bubble-wrap { margin-bottom: 24px; }
+  .chat-time {
+    font-size: 11px; color: var(--muted); margin-bottom: 8px; font-weight: 500;
+  }
+  .chat-bubble {
+    background: #E8F5E9;
+    border-radius: 16px 16px 16px 4px;
+    padding: 14px 16px;
+    font-size: 14px; line-height: 1.6; color: var(--dark);
+    position: relative;
+    border: 1px solid #C8E6C9;
+    max-width: 88%;
+  }
+  .chat-bubble .sender {
+    font-size: 11px; font-weight: 700; color: #2E7D32;
+    margin-bottom: 4px;
+  }
+  .scene-body { font-size: 15px; color: var(--mid); line-height: 1.7; }
+  .scene-body p + p { margin-top: 12px; }
+  .scene-body strong { color: var(--dark); }
+
+  /* ── SECTION TITLES ──────────────────────────────── */
+  .eyebrow {
+    font-size: 10px; font-weight: 700; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--green-mid);
+    margin-bottom: 8px;
+  }
+  .section-title {
+    font-size: 22px; font-weight: 800; color: var(--dark);
+    line-height: 1.25; letter-spacing: -.02em;
+    margin-bottom: 8px;
+  }
+  .section-sub {
+    font-size: 14px; color: var(--muted); line-height: 1.6;
+    margin-bottom: 24px;
+  }
+
+  /* ── WHAT'S INSIDE ───────────────────────────────── */
+  .modules { background: var(--white); border-bottom: 1px solid var(--border); }
+  .modules-inner { max-width: var(--max); margin: 0 auto; padding: 36px 20px; }
+  .module-card {
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px;
+    margin-bottom: 12px;
+    background: var(--bg);
+  }
+  .module-card:last-child { margin-bottom: 0; }
+  .module-header {
+    display: flex; align-items: flex-start; gap: 12px;
+    margin-bottom: 8px;
+  }
+  .module-icon {
+    width: 36px; height: 36px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .mod-green { background: var(--green-light); }
+  .mod-red   { background: #FDEDEC; }
+  .mod-amber { background: #FEF9E7; }
+  .module-title {
+    font-size: 15px; font-weight: 700; color: var(--dark);
+    line-height: 1.3;
+  }
+  .module-tag {
+    font-size: 10px; font-weight: 600; color: var(--green);
+    text-transform: uppercase; letter-spacing: .06em;
+    background: var(--green-light); padding: 2px 7px; border-radius: 5px;
+    display: inline-block; margin-top: 4px;
+  }
+  .module-desc {
+    font-size: 13px; color: var(--muted); line-height: 1.6;
+  }
+  .module-items {
+    list-style: none; margin-top: 8px;
+    display: flex; flex-direction: column; gap: 5px;
+  }
+  .module-items li {
+    font-size: 13px; color: var(--mid);
+    display: flex; gap: 8px; align-items: flex-start;
+  }
+  .module-items li::before {
+    content: '→'; color: var(--green-mid);
+    font-weight: 700; flex-shrink: 0; line-height: 1.6;
+  }
+
+  /* ── URGENCY ─────────────────────────────────────── */
+  .urgency { background: var(--dark); }
+  .urgency-inner { max-width: var(--max); margin: 0 auto; padding: 36px 20px; }
+  .urgency-inner .eyebrow { color: #FF6B5B; }
+  .urgency-inner .section-title { color: #fff; }
+  .urgency-inner .section-sub { color: rgba(255,255,255,.55); }
+  .risk-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+  .risk-item {
+    display: flex; gap: 14px; align-items: flex-start;
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 12px; padding: 16px;
+  }
+  .risk-num {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: rgba(231,76,60,.2); border: 1px solid rgba(231,76,60,.35);
+    color: #FF6B5B; font-size: 12px; font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .risk-text { font-size: 14px; color: rgba(255,255,255,.75); line-height: 1.6; }
+  .risk-text strong { color: #fff; display: block; font-size: 14px; margin-bottom: 2px; }
+
+  /* ── OFFER ───────────────────────────────────────── */
+  .offer { background: var(--white); border-bottom: 1px solid var(--border); }
+  .offer-inner { max-width: var(--max); margin: 0 auto; padding: 36px 20px; }
+  .price-block {
+    background: var(--dark);
+    border-radius: 20px;
+    padding: 28px 24px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .price-from { font-size: 12px; color: rgba(255,255,255,.4); text-decoration: line-through; margin-bottom: 4px; }
+  .price-big {
+    font-size: 52px; font-weight: 900; color: #fff;
+    letter-spacing: -.04em; line-height: 1;
+    margin-bottom: 2px;
+  }
+  .price-big sup { font-size: 22px; vertical-align: super; font-weight: 700; }
+  .price-label { font-size: 12px; color: rgba(255,255,255,.45); margin-bottom: 24px; }
+  .btn-offer {
+    display: block; width: 100%;
+    background: var(--green-mid);
+    color: #fff; font-weight: 800; font-size: 17px;
+    padding: 18px 20px; border-radius: 14px;
+    border: none; cursor: pointer;
+    text-align: center; text-decoration: none;
+    letter-spacing: -.01em; margin-bottom: 12px;
+  }
+  .btn-offer small { display: block; font-weight: 400; font-size: 12px; opacity: .75; margin-top: 3px; }
+  .trust-row {
+    display: flex; align-items: center; justify-content: center; gap: 4px;
+    color: rgba(255,255,255,.4); font-size: 11px;
+  }
+  .include-list {
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: 14px; padding: 18px 18px;
+    margin-bottom: 20px;
+  }
+  .include-title {
+    font-size: 12px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: .07em; color: var(--muted); margin-bottom: 12px;
+  }
+  .include-item {
+    display: flex; gap: 10px; align-items: flex-start;
+    padding: 8px 0; border-bottom: 1px solid var(--border);
+  }
+  .include-item:last-child { border-bottom: none; }
+  .include-check {
+    width: 20px; height: 20px; border-radius: 50%;
+    background: var(--green-light);
+    color: var(--green); font-size: 11px; font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 2px;
+  }
+  .include-text { font-size: 14px; color: var(--mid); line-height: 1.5; }
+  .include-text strong { color: var(--dark); }
+
+  /* ── GUARANTEE ───────────────────────────────────── */
+  .guarantee-block {
+    background: var(--green-light);
+    border: 1px solid #A8D5C2;
+    border-radius: 14px; padding: 20px;
+    display: flex; gap: 14px; align-items: flex-start;
+    margin-bottom: 20px;
+  }
+  .guarantee-icon {
+    font-size: 28px; flex-shrink: 0; margin-top: 2px;
+  }
+  .guarantee-text h4 {
+    font-size: 15px; font-weight: 700; color: var(--green);
+    margin-bottom: 4px;
+  }
+  .guarantee-text p { font-size: 13px; color: #2E7D32; line-height: 1.6; }
+
+  /* ── QUESTIONS CTA ───────────────────────────────── */
+  .q-section { background: var(--bg); }
+  .q-inner { max-width: var(--max); margin: 0 auto; padding: 36px 20px; }
+  .q-list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
+  .q-item {
+    background: var(--white); border: 1px solid var(--border);
+    border-left: 3px solid var(--red-border);
+    border-radius: 10px; padding: 14px 16px;
+    font-size: 14px; color: var(--dark); font-weight: 500; line-height: 1.4;
+  }
+  .q-note { font-size: 14px; color: var(--muted); line-height: 1.7; margin-bottom: 24px; }
+
+  /* ── BONUS CARD ──────────────────────────────────── */
+  .bonus-section { background: var(--white); border-bottom: 1px solid var(--border); }
+  .bonus-inner { max-width: var(--max); margin: 0 auto; padding: 36px 20px; }
+  .bonus-card {
+    border: 2px solid var(--green-mid);
+    border-radius: 16px; padding: 20px;
+    position: relative; overflow: hidden;
+  }
+  .bonus-pill {
+    display: inline-block;
+    background: var(--green-mid); color: #fff;
+    font-size: 10px; font-weight: 700; letter-spacing: .08em;
+    text-transform: uppercase; padding: 4px 10px; border-radius: 6px;
+    margin-bottom: 10px;
+  }
+  .bonus-card h3 { font-size: 16px; font-weight: 800; color: var(--dark); margin-bottom: 6px; }
+  .bonus-card p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+  /* ── FINAL CTA ───────────────────────────────────── */
+  .final-cta { background: var(--dark); }
+  .final-inner { max-width: var(--max); margin: 0 auto; padding: 40px 20px 60px; }
+  .final-inner .section-title { color: #fff; font-size: 24px; margin-bottom: 6px; }
+  .final-inner .section-sub { color: rgba(255,255,255,.5); margin-bottom: 28px; }
+
+  /* ── SCROLL REVEAL ───────────────────────────────── */
+  .reveal {
+    opacity: 0; transform: translateY(18px);
+    transition: opacity .5s ease, transform .5s ease;
+  }
+  .reveal.in { opacity: 1; transform: none; }
+
+  /* ── BOTTOM SAFE AREA ────────────────────────────── */
+  .pb-safe { padding-bottom: env(safe-area-inset-bottom, 16px); }
+</style>
+</head>
+<body>
+
+<!-- ── STICKY BAR ───────────────────────────────────── -->
+<div class="sticky-bar" id="stickyBar">
+  <div class="sticky-bar-inner">
+    <div class="sticky-bar-text">
+      <strong>Blindagem PIX — R$27</strong>
+      Acesso imediato após o pagamento
+    </div>
+    <button class="sticky-bar-btn" onclick="ctaClick()">Quero agora</button>
+  </div>
+</div>
+
+<!-- ── HERO ─────────────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">Golpes aumentaram 340% em 2025</div>
+    <h1>Seu <span style="color:#25D366">WhatsApp</span> e seu <span style="color:#00B4D8">PIX</span> estão <em>abertos para golpistas</em> agora.</h1>
+    <p class="hero-sub">Em 20 minutos você ativa as configurações que blindam seu WhatsApp, seu PIX e sua conta bancária. <strong>Sem curso, sem módulo. Só o que fazer.</strong></p>
+    <a href="#oferta" class="btn-primary" id="heroCta" onclick="ctaClick()">
+      Quero blindar minha conta agora
+      <small>R$27 · Acesso imediato · Garantia de 7 dias</small>
+    </a>
+    <div class="hero-trust">
+      <span>Pagamento seguro</span>
+      <span>PDF direto no e-mail</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── CENA ──────────────────────────────────────────── -->
+<section class="scene">
+  <div class="scene-inner reveal">
+    <div class="chat-bubble-wrap">
+      <div class="chat-time">23h14 — hoje à noite</div>
+      <div class="chat-bubble">
+        <div class="sender">Banco Bradesco</div>
+        Confirmação necessária: transação PIX no valor de <strong>R$1.800,00</strong> detectada. Acesse o link para validar ou cancelar. ⚠️
+      </div>
+    </div>
+    <div class="scene-body">
+      <p>Você não fez essa transação.</p>
+      <p>Mas alguém fez — <strong>usando o seu número</strong>.</p>
+      <p>Isso acontece porque o WhatsApp não tinha uma configuração que leva 2 minutos para ativar. O PIX não tinha limite noturno. E quando o dinheiro saiu, a pessoa não sabia o que fazer nem para onde ligar.</p>
+      <p><strong>Esse guia existe para que isso não aconteça com você.</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- ── O QUE ESTÁ DENTRO ─────────────────────────────── -->
+<section class="modules">
+  <div class="modules-inner">
+    <div class="reveal">
+      <p class="eyebrow">O produto</p>
+      <h2 class="section-title">PDF. 20 minutos. Feito.</h2>
+      <p class="section-sub">Não é curso. Não tem módulo. Você aplica hoje e não precisa pensar nisso de novo.</p>
+    </div>
+
+    <div class="module-card reveal">
+      <div class="module-header">
+        <div class="module-icon mod-green">💬</div>
+        <div>
+          <div class="module-title">Blindagem WhatsApp</div>
+          <span class="module-tag">Parte 1</span>
+        </div>
+      </div>
+      <ul class="module-items">
+        <li>PIN de dois fatores — bloqueia clonagem do número</li>
+        <li>E-mail de recuperação — impede que o golpista recupere antes de você</li>
+        <li>Revisão de dispositivos — desconecta acessos desconhecidos</li>
+      </ul>
+    </div>
+
+    <div class="module-card reveal">
+      <div class="module-header">
+        <div class="module-icon mod-green">💸</div>
+        <div>
+          <div class="module-title">Blindagem PIX</div>
+          <span class="module-tag">Parte 2</span>
+        </div>
+      </div>
+      <ul class="module-items">
+        <li>Limite noturno — teto de transferência entre 20h e 6h</li>
+        <li>Alertas em tempo real — notificação imediata de qualquer movimentação</li>
+        <li>Dispositivos autorizados — controle de quem pode fazer PIX pela sua conta</li>
+      </ul>
+      <p class="module-desc" style="margin-top:10px; font-size:12px">Passo a passo para Nubank, Itaú, Bradesco, Banco do Brasil e Caixa.</p>
+    </div>
+
+    <div class="module-card reveal">
+      <div class="module-header">
+        <div class="module-icon mod-red">🚨</div>
+        <div>
+          <div class="module-title">Se acontecer um golpe</div>
+          <span class="module-tag">Parte 3</span>
+        </div>
+      </div>
+      <ul class="module-items">
+        <li>A ordem exata do que fazer nos primeiros minutos</li>
+        <li>Como acionar o MED — o mecanismo que pode devolver seu dinheiro</li>
+        <li>Onde registrar o BO online e por que isso importa</li>
+      </ul>
+    </div>
+
+    <div class="module-card reveal" style="border: 2px solid var(--green-mid); background:#fff;">
+      <div class="module-header">
+        <div class="module-icon mod-amber">🃏</div>
+        <div>
+          <div class="module-title">Cartão de Emergência PIX</div>
+          <span class="module-tag" style="background:#FEF9E7; color:#92620A">Bônus</span>
+        </div>
+      </div>
+      <p class="module-desc">Uma página para imprimir e guardar na carteira. Se um golpe acontecer, você já sabe exatamente o que fazer — sem precisar lembrar de nada.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── URGÊNCIA ───────────────────────────────────────── -->
+<section class="urgency">
+  <div class="urgency-inner">
+    <div class="reveal">
+      <p class="eyebrow">Por que agora</p>
+      <h2 class="section-title">A brecha não some sozinha.</h2>
+      <p class="section-sub">Enquanto você não ativa essas configurações, ela continua aberta. Hoje à noite, amanhã de manhã, no próximo fim de semana.</p>
+    </div>
+    <ul class="risk-list">
+      <li class="risk-item reveal">
+        <div class="risk-num">1</div>
+        <div class="risk-text"><strong>Golpistas não avisam quando vão agir</strong>Eles esperam o momento em que você está distraído — ou dormindo.</div>
+      </li>
+      <li class="risk-item reveal">
+        <div class="risk-num">2</div>
+        <div class="risk-text"><strong>Os primeiros minutos são os únicos que importam</strong>O MED tem prazo. Quem não sabe disso só descobre quando já é tarde.</div>
+      </li>
+      <li class="risk-item reveal">
+        <div class="risk-num">3</div>
+        <div class="risk-text"><strong>A maioria das vítimas achava que estava protegida</strong>Não é falta de cuidado. É falta de uma configuração que ninguém ensinou a ativar.</div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ── PERGUNTAS ──────────────────────────────────────── -->
+<section class="q-section">
+  <div class="q-inner">
+    <div class="reveal">
+      <p class="eyebrow">Antes de continuar</p>
+      <h2 class="section-title">Responda rápido:</h2>
+    </div>
+    <ul class="q-list">
+      <li class="q-item reveal">Seu PIX tem limite noturno ativo?</li>
+      <li class="q-item reveal">Seu WhatsApp tem PIN de dois fatores?</li>
+      <li class="q-item reveal">Você sabe o que fazer se um golpe acontecer agora?</li>
+    </ul>
+    <p class="q-note reveal">Se você hesitou em alguma dessas perguntas, este guia é para você. A brecha está aberta — e não fecha sozinha.</p>
+    <a href="#oferta" class="btn-primary reveal" onclick="ctaClick()">
+      Fechar essas brechas agora
+      <small>R$27 · PDF no seu e-mail em segundos</small>
+    </a>
+  </div>
+</section>
+
+<!-- ── BÔNUS ──────────────────────────────────────────── -->
+<section class="bonus-section">
+  <div class="bonus-inner">
+    <div class="reveal">
+      <p class="eyebrow">Incluso na compra</p>
+      <h2 class="section-title">Cartão de Emergência PIX</h2>
+      <p class="section-sub">Para imprimir e guardar na carteira — ou tirar print e salvar no celular.</p>
+    </div>
+    <div class="bonus-card reveal">
+      <div class="bonus-pill">Bônus</div>
+      <h3>Se cair em um golpe PIX, faça isso agora:</h3>
+      <p style="margin-top:10px; color: var(--dark); font-size:14px; line-height:1.9">
+        1. Ligue pro banco e peça bloqueio imediato<br>
+        2. Acione o MED no app — prazo de 80 minutos<br>
+        3. Denuncie o número no WhatsApp<br>
+        4. Faça o BO online
+      </p>
+      <p style="margin-top:12px; font-size:12px; color:var(--muted)">+ Telefones de emergência dos 5 principais bancos do Brasil</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── OFERTA ─────────────────────────────────────────── -->
+<section class="offer" id="oferta">
+  <div class="offer-inner">
+    <div class="reveal">
+      <p class="eyebrow">Sua proteção</p>
+      <h2 class="section-title">Tudo isso por R$27.</h2>
+      <p class="section-sub">Uma transferência indevida pode custar centenas. Uma tarde no banco tentando resolver pode custar um dia inteiro. R$27 e 20 minutos fecha essas brechas agora.</p>
+    </div>
+
+    <div class="include-list reveal">
+      <div class="include-title">O que você leva</div>
+      <div class="include-item">
+        <div class="include-check">✓</div>
+        <div class="include-text"><strong>Guia Blindagem PIX em PDF</strong> — configurações exatas, passo a passo visual, sem enrolação</div>
+      </div>
+      <div class="include-item">
+        <div class="include-check">✓</div>
+        <div class="include-text"><strong>Parte 1 — Blindagem WhatsApp</strong> com 3 configurações de segurança</div>
+      </div>
+      <div class="include-item">
+        <div class="include-check">✓</div>
+        <div class="include-text"><strong>Parte 2 — Blindagem PIX</strong> com passo a passo para os 5 maiores bancos</div>
+      </div>
+      <div class="include-item">
+        <div class="include-check">✓</div>
+        <div class="include-text"><strong>Parte 3 — Se acontecer um golpe</strong> — o que fazer, em ordem, nos primeiros minutos</div>
+      </div>
+      <div class="include-item" style="border-bottom:none">
+        <div class="include-check" style="background:#FEF9E7; color:#92620A">✓</div>
+        <div class="include-text"><strong>Bônus: Cartão de Emergência PIX</strong> — imprime, guarda na carteira, e já sabe o que fazer</div>
+      </div>
+    </div>
+
+    <div class="guarantee-block reveal">
+      <div class="guarantee-icon">🛡️</div>
+      <div class="guarantee-text">
+        <h4>Garantia de 7 dias</h4>
+        <p>Se você seguir o passo a passo e sentir que não valeu, é só me mandar mensagem. Devolvo tudo sem perguntas. O risco é zero.</p>
+      </div>
+    </div>
+
+    <div class="price-block reveal">
+      <div class="price-from">De R$47</div>
+      <div class="price-big"><sup>R$</sup>27</div>
+      <div class="price-label">pagamento único · sem mensalidade</div>
+      <a href="#" class="btn-offer" onclick="ctaClick(); return false;">
+        Quero blindar minha conta agora
+        <small>Acesso imediato · PDF direto no seu e-mail</small>
+      </a>
+      <div class="trust-row">🔒 Pagamento seguro &nbsp;·&nbsp; 7 dias de garantia</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── FINAL CTA ───────────────────────────────────────── -->
+<section class="final-cta">
+  <div class="final-inner pb-safe">
+    <div class="reveal">
+      <h2 class="section-title">Você fez o que a maioria não faz.</h2>
+      <p class="section-sub">Agora sua conta está mais protegida do que 90% dos brasileiros.</p>
+      <a href="#oferta" class="btn-primary" onclick="ctaClick()" style="background: var(--green-mid);">
+        Garantir minha proteção por R$27
+        <small>Acesso imediato após o pagamento</small>
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+  // ── STICKY BAR ───────────────────────────────────────────
+  const stickyBar = document.getElementById('stickyBar');
+  const heroCta   = document.getElementById('heroCta');
+
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      stickyBar.classList.toggle('visible', !entry.isIntersecting);
+    },
+    { threshold: 0 }
+  );
+  observer.observe(heroCta);
+
+  // ── SCROLL REVEAL ────────────────────────────────────────
+  const revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          revealObserver.unobserve(e.target);
+        }
+      });
+    },
+    { threshold: 0.12, rootMargin: '0px 0px -30px 0px' }
+  );
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+  // ── CTA CLICK ────────────────────────────────────────────
+  function ctaClick() {
+    // Troque pelo link real de checkout
+    // window.location.href = 'https://pay.hotmart.com/seu-link';
+    console.log('CTA clicado — redirecionar para checkout');
+  }
+
+  // ── QUESTION ITEMS — tap to check ────────────────────────
+  document.querySelectorAll('.q-item').forEach(item => {
+    item.addEventListener('click', function() {
+      this.style.borderLeftColor = 'var(--green-mid)';
+      this.style.color = 'var(--muted)';
+      this.style.textDecoration = 'line-through';
+    });
+  });
+</script>
+</body>
+</html>
