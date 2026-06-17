@@ -388,7 +388,7 @@
       <strong>Blindagem PIX — R$27</strong>
       Acesso imediato após o pagamento
     </div>
-    <button class="sticky-bar-btn" onclick="ctaClick()">Quero agora</button>
+    <button class="sticky-bar-btn" onclick="window.location.href='https://pay.hotmart.com/J106220568T'">Quero agora</button>
   </div>
 </div>
 
@@ -398,7 +398,7 @@
     <div class="hero-badge">Golpes aumentaram 340% em 2025</div>
     <h1>Seu <span style="color:#25D366">WhatsApp</span> e seu <span style="color:#00B4D8">PIX</span> estão <em>abertos para golpistas</em> agora.</h1>
     <p class="hero-sub">Em 20 minutos você ativa as configurações que blindam seu WhatsApp, seu PIX e sua conta bancária. <strong>Sem curso, sem módulo. Só o que fazer.</strong></p>
-    <a href="#oferta" class="btn-primary" id="heroCta" onclick="ctaClick()">
+    <a href="#oferta" class="btn-primary" id="heroCta">
       Quero blindar minha conta agora
       <small>R$27 · Acesso imediato · Garantia de 7 dias</small>
     </a>
@@ -534,7 +534,7 @@
       <li class="q-item reveal">Você sabe o que fazer se um golpe acontecer agora?</li>
     </ul>
     <p class="q-note reveal">Se você hesitou em alguma dessas perguntas, este guia é para você. A brecha está aberta — e não fecha sozinha.</p>
-    <a href="#oferta" class="btn-primary reveal" onclick="ctaClick()">
+    <a href="#oferta" class="btn-primary reveal">
       Fechar essas brechas agora
       <small>R$27 · PDF no seu e-mail em segundos</small>
     </a>
@@ -608,7 +608,7 @@
       <div class="price-from">De R$47</div>
       <div class="price-big"><sup>R$</sup>27</div>
       <div class="price-label">pagamento único · sem mensalidade</div>
-      <a href="#" class="btn-offer" onclick="ctaClick(); return false;">
+      <a href="https://pay.hotmart.com/J106220568T" class="btn-offer" onclick="ctaClick()">
         Quero blindar minha conta agora
         <small>Acesso imediato · PDF direto no seu e-mail</small>
       </a>
@@ -624,7 +624,7 @@
     <div class="reveal">
       <h2 class="section-title">Você fez o que a maioria não faz.</h2>
       <p class="section-sub">Agora sua conta está mais protegida do que 90% dos brasileiros.</p>
-      <a href="#oferta" class="btn-primary" onclick="ctaClick()" style="background: var(--green-mid);">
+      <a href="#oferta" class="btn-primary" style="background: var(--green-mid);">
         Garantir minha proteção por R$27
         <small>Acesso imediato após o pagamento</small>
       </a>
@@ -661,9 +661,7 @@
 
   // ── CTA CLICK ────────────────────────────────────────────
   function ctaClick() {
-    // Troque pelo link real de checkout
-    // window.location.href = 'https://pay.hotmart.com/seu-link';
-    console.log('CTA clicado — redirecionar para checkout');
+    window.location.href = 'https://pay.hotmart.com/J106220568T';
   }
 
   // ── QUESTION ITEMS — tap to check ────────────────────────
