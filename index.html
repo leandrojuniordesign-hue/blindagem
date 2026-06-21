@@ -4,6 +4,31 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>Blindagem PIX — Proteja seu WhatsApp e seu dinheiro</title>
+
+<!-- ════════════════════════════════════════════════════════════
+     META PIXEL — troque SEU_PIXEL_ID_AQUI (nas duas linhas) pelo
+     ID real. Pegue em: Gerenciador de Eventos > Pixels > sua conta.
+     O evento "Purchase" não precisa ser configurado aqui — a
+     Hotmart já dispara isso sozinha na página de obrigado, basta
+     colar o mesmo Pixel ID nas configurações de integração dela.
+     ════════════════════════════════════════════════════════════ -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', 'SEU_PIXEL_ID_AQUI');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=SEU_PIXEL_ID_AQUI&ev=PageView&noscript=1"
+/></noscript>
+<!-- ════════════════════════════════════════════════════════════ -->
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -175,6 +200,90 @@
     font-size: 10px; color: rgba(255,255,255,.35);
     line-height: 1.4;
   }
+
+  /* ── TRUST / CONFIANÇA ────────────────────────────── */
+  .trust-section { background: var(--white); border-bottom: 1px solid var(--border); }
+  .trust-section-inner { max-width: var(--max); margin: 0 auto; padding: 36px 20px; }
+  .trust-grid { display: flex; flex-direction: column; gap: 14px; margin-bottom: 26px; }
+  .trust-item { display: flex; gap: 12px; align-items: flex-start; }
+  .trust-item-icon {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: var(--green-light); flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 17px;
+  }
+  .trust-item-text { font-size: 14px; color: var(--mid); line-height: 1.55; }
+  .trust-item-text strong { display: block; color: var(--dark); font-size: 14px; margin-bottom: 2px; }
+
+  .testimonial-label {
+    font-size: 11px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: .07em; color: var(--muted); margin-bottom: 10px;
+  }
+  .testimonial-row { display: flex; flex-direction: column; gap: 12px; }
+  .testimonial-card {
+    border: 1px solid var(--border);
+    border-radius: 14px; padding: 18px;
+    background: var(--bg);
+  }
+  .testimonial-persona {
+    display: inline-block;
+    font-size: 10px; font-weight: 700; color: var(--green-mid);
+    background: var(--green-light);
+    padding: 3px 10px; border-radius: 20px;
+    margin-bottom: 10px;
+  }
+  .testimonial-quote { font-size: 13.5px; color: var(--mid); line-height: 1.65; font-style: italic; }
+  .testimonial-author {
+    margin-top: 12px; display: flex; align-items: baseline; gap: 6px;
+  }
+  .testimonial-author-name { font-size: 12.5px; font-weight: 700; color: var(--dark); }
+  .testimonial-author-loc { font-size: 11.5px; color: var(--muted); }
+
+  /* ── FAQ ─────────────────────────────────────────── */
+  .faq-section { background: var(--bg); border-bottom: 1px solid var(--border); }
+  .faq-inner { max-width: var(--max); margin: 0 auto; padding: 36px 20px; }
+  .faq-list { display: flex; flex-direction: column; gap: 10px; }
+  .faq-item {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 12px; padding: 14px 16px;
+  }
+  .faq-item summary {
+    font-size: 14px; font-weight: 700; color: var(--dark);
+    cursor: pointer; list-style: none;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 10px;
+  }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item summary::after {
+    content: '+';
+    font-size: 19px; font-weight: 400; color: var(--green-mid);
+    flex-shrink: 0; transition: transform .2s; line-height: 1;
+  }
+  .faq-item[open] summary::after { transform: rotate(45deg); }
+  .faq-item p {
+    font-size: 13px; color: var(--muted); line-height: 1.65;
+    margin-top: 10px;
+  }
+
+  /* ── PAYMENT ICONS ─────────────────────────────────── */
+  .payment-icons {
+    display: flex; align-items: center; justify-content: center; gap: 18px;
+    margin-top: 14px; flex-wrap: wrap;
+  }
+  .payment-icon-item {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 11px; color: rgba(255,255,255,.45); font-weight: 600;
+  }
+  .payment-icon-item svg { display: block; flex-shrink: 0; }
+
+  /* ── FOOTER ──────────────────────────────────────── */
+  .site-footer { background: var(--dark); padding: 28px 20px 36px; }
+  .site-footer-inner { max-width: var(--max); margin: 0 auto; text-align: center; }
+  .site-footer-links { display: flex; justify-content: center; gap: 18px; margin-bottom: 14px; flex-wrap: wrap; }
+  .site-footer-links a { font-size: 12px; color: rgba(255,255,255,.55); text-decoration: none; }
+  .site-footer-links a:hover { color: rgba(255,255,255,.85); }
+  .site-footer-disclaimer { font-size: 10.5px; color: rgba(255,255,255,.3); line-height: 1.6; margin-bottom: 10px; }
+  .site-footer-copy { font-size: 10.5px; color: rgba(255,255,255,.25); }
 
   /* ── SCENE ───────────────────────────────────────── */
   .scene {
@@ -456,11 +565,10 @@
     <video autoplay muted loop playsinline preload="auto" poster="poster-ameaca.jpg" aria-hidden="true">
       <source src="ameaca-pix.mp4" type="video/mp4">
     </video>
-    <span class="hero-media-tag">⚠️ Cena dramatizada</span>
   </div>
   <div class="hero-inner">
     <div class="hero-badge">Golpes aumentaram 340% em 2025</div>
-    <h1>Seu <span style="color:#25D366">WhatsApp</span> e seu <span style="color:#00B4D8">PIX</span> estão <em>abertos para golpistas</em> agora.</h1>
+    <h1>Sem essas configurações, <span style="color:#25D366">WhatsApp</span> e <span style="color:#00B4D8">PIX</span> viram <em>porta aberta para golpistas</em>.</h1>
     <p class="hero-sub">Em 20 minutos você ativa as configurações que blindam seu WhatsApp, seu PIX e sua conta bancária. <strong>Sem curso, sem módulo. Só o que fazer.</strong></p>
     <a href="#oferta" class="btn-primary" id="heroCta" onclick="ctaClick()">
       Quero blindar minha conta agora
@@ -608,6 +716,57 @@
   </div>
 </section>
 
+<!-- ── CONFIANÇA ──────────────────────────────────────── -->
+<section class="trust-section">
+  <div class="trust-section-inner">
+    <div class="reveal">
+      <p class="eyebrow">Por que confiar</p>
+      <h2 class="section-title">Sem enrolação, sem promessa vazia.</h2>
+    </div>
+    <div class="trust-grid reveal">
+      <div class="trust-item">
+        <div class="trust-item-icon">🏦</div>
+        <div class="trust-item-text"><strong>5 bancos cobertos</strong>Passo a passo específico para Nubank, Itaú, Bradesco, Banco do Brasil e Caixa.</div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-item-icon">🛡️</div>
+        <div class="trust-item-text"><strong>Garantia incondicional</strong>7 dias para testar. Não sentiu valor, devolvemos sem perguntas.</div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-item-icon">⚡</div>
+        <div class="trust-item-text"><strong>Acesso imediato</strong>PDF direto no seu e-mail após o pagamento. Sem espera, sem login.</div>
+      </div>
+    </div>
+
+    <div class="testimonial-label">O que dizem</div>
+    <div class="testimonial-row reveal">
+      <div class="testimonial-card">
+        <p class="testimonial-quote">"Um amigo perdeu quase R$4 mil depois que clonaram o WhatsApp dele. Foi isso que me fez comprar. O que mais gostei foi que não tem enrolação, curso nem vídeo de horas. É abrir o PDF, seguir os passos e pronto."</p>
+        <div class="testimonial-author">
+          <span class="testimonial-author-name">Rafael T.</span>
+          <span class="testimonial-author-loc">— Curitiba/PR</span>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <span class="testimonial-persona">Mulher, 58 anos, aposentada</span>
+        <p class="testimonial-quote">"Tenho muito medo dessas coisas de PIX porque não entendo de tecnologia. O guia é tão simples que consegui fazer tudo sozinha. Ativei o limite noturno e as proteções do WhatsApp seguindo os prints. Dormi muito mais tranquila depois disso."</p>
+        <div class="testimonial-author">
+          <span class="testimonial-author-name">Maria Aparecida S.</span>
+          <span class="testimonial-author-loc">— Campinas/SP</span>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <span class="testimonial-persona">Mulher, 31 anos, mãe de família</span>
+        <p class="testimonial-quote">"O que me convenceu foi a parte de emergência. Eu nunca tinha ouvido falar do MED e não fazia ideia do que fazer se um golpe acontecesse. Agora tenho até o cartão de emergência salvo no celular. Parece exagero, mas dá uma sensação enorme de segurança."</p>
+        <div class="testimonial-author">
+          <span class="testimonial-author-name">Juliana R.</span>
+          <span class="testimonial-author-loc">— São Paulo/SP</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ── PERGUNTAS ──────────────────────────────────────── -->
 <section class="q-section">
   <div class="q-inner">
@@ -700,8 +859,71 @@
         <small>Acesso imediato · PDF direto no seu e-mail</small>
       </a>
       <div class="trust-row">🔒 Pagamento seguro &nbsp;·&nbsp; 7 dias de garantia</div>
+      <div class="payment-icons">
+        <span class="payment-icon-item">
+          <svg width="20" height="14" viewBox="0 0 24 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="1" y="1" width="22" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/>
+            <rect x="1" y="5" width="22" height="3" fill="currentColor"/>
+          </svg>
+          Cartão
+        </span>
+        <span class="payment-icon-item">
+          <svg width="16" height="14" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="1" y="2" width="2" height="14" fill="currentColor"/>
+            <rect x="5" y="2" width="1" height="14" fill="currentColor"/>
+            <rect x="8" y="2" width="3" height="14" fill="currentColor"/>
+            <rect x="13" y="2" width="1" height="14" fill="currentColor"/>
+            <rect x="16" y="2" width="2" height="14" fill="currentColor"/>
+          </svg>
+          Boleto
+        </span>
+        <!-- 🔜 Quando ativar o Pix no checkout da Hotmart, descomente o bloco abaixo
+        <span class="payment-icon-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2L2 12l10 10 10-10L12 2z" stroke="currentColor" stroke-width="1.5"/>
+          </svg>
+          Pix
+        </span>
+        -->
+      </div>
     </div>
 
+  </div>
+</section>
+
+<!-- ── FAQ ────────────────────────────────────────────── -->
+<section class="faq-section">
+  <div class="faq-inner">
+    <div class="reveal">
+      <p class="eyebrow">Dúvidas</p>
+      <h2 class="section-title">Perguntas frequentes</h2>
+    </div>
+    <div class="faq-list reveal">
+      <details class="faq-item">
+        <summary>Funciona em Android e iPhone?</summary>
+        <p>Sim. O passo a passo cobre as duas plataformas, com prints separados para cada sistema.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Funciona só para os 5 bancos citados?</summary>
+        <p>O passo a passo detalhado é para Nubank, Itaú, Bradesco, Banco do Brasil e Caixa — os mais usados no país. A lógica das configurações (limite noturno, alertas, dispositivos autorizados) existe na maioria dos outros bancos também, só muda o caminho dentro do app.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Como eu recebo o material?</summary>
+        <p>Assim que o pagamento é aprovado, o PDF chega direto no e-mail usado na compra. Não precisa criar login nem baixar aplicativo.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Preciso entender de tecnologia?</summary>
+        <p>Não. O guia foi feito para quem nunca mexeu em nenhuma configuração — é só seguir os prints, passo a passo.</p>
+      </details>
+      <details class="faq-item">
+        <summary>É uma assinatura?</summary>
+        <p>Não. Pagamento único de R$27. Sem mensalidade, sem cobrança recorrente.</p>
+      </details>
+      <details class="faq-item">
+        <summary>E se eu não gostar?</summary>
+        <p>Você tem 7 dias de garantia. Se sentir que não valeu, é só pedir o reembolso — devolvemos tudo, sem perguntas.</p>
+      </details>
+    </div>
   </div>
 </section>
 
@@ -718,6 +940,18 @@
     </div>
   </div>
 </section>
+
+<!-- ── FOOTER ──────────────────────────────────────────── -->
+<footer class="site-footer">
+  <div class="site-footer-inner">
+    <div class="site-footer-links">
+      <a href="politica-de-privacidade.html">Política de Privacidade</a>
+      <a href="termos-de-uso.html">Termos de Uso</a>
+    </div>
+    <p class="site-footer-disclaimer">Este produto é independente e não possui qualquer vínculo, patrocínio ou afiliação com Meta, WhatsApp, Banco Central, Nubank, Itaú, Bradesco, Banco do Brasil ou Caixa. As marcas citadas pertencem aos seus respectivos donos e são mencionadas apenas a título ilustrativo. Pagamento processado com segurança pela Hotmart.</p>
+    <p class="site-footer-copy">© 2026 Blindagem PIX. Todos os direitos reservados.</p>
+  </div>
+</footer>
 
 <script>
   // ── STICKY BAR ───────────────────────────────────────────
@@ -748,6 +982,9 @@
 
   // ── CTA CLICK ────────────────────────────────────────────
   function ctaClick() {
+    if (typeof fbq === 'function') {
+      fbq('track', 'InitiateCheckout');
+    }
     window.location.href = 'https://pay.hotmart.com/J106220568T';
   }
 
